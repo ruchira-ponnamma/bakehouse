@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fresh Crumbs Bakehouse</title>
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    body {
+      background: #fff7f3;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden; 
+    }
+
+    .splash {
+      text-align: center;
+      animation: zoomFade 2s ease-in-out;
+    }
+
+    .splash h1 {
+      font-size: 2.5rem;
+      color: #c25a4a;
+      margin-top: 15px;
+    }
+
+    @keyframes zoomFade {
+      0% {
+        transform: scale(0.7);
+        opacity: 0;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="splash">
+  <img src="Images/Logo.png" alt="Fresh Crumbs Bakehouse Logo">
+  <p>Freshly baked happiness</p>
+</div>
+
+
+  <script>
+    setTimeout(() => {
+      window.location.href = "index.html";
+    }, 2500); // 2.5 seconds
+  </script>
+
+</body>
+</html> 

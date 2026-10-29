@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Place Order | Fresh Crumbs Bakehouse</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="logo"><a href="index.html"><img src="Images/Logo.png" alt="Fresh Crumbs Bakehouse Logo"><span class="logo-text">Fresh Crumbs Bakehouse</span></a></div>
+  <nav aria-label="Main navigation"><a href="index.html">Home</a><a href="cakes.html">Cakes</a><a href="brownies.html">Brownies</a><a href="cookies.html">Cookies</a><a href="muffins.html">Muffins</a><a href="feedback.html">Feedback</a></nav>
+</header>
+<main class="product-page">
+  <h2>Place Your Order</h2>
+  <p class="order-intro">Make your celebrations sweeter. Choose your favourites and customise your order below.</p>
+  <form class="order-form" id="orderForm" novalidate>
+    <label for="productName">Product</label>
+    <input type="text" id="productName" placeholder="Choose a product from a menu page" readonly required>
+    <label for="customerName">Your name</label>
+    <input type="text" id="customerName" placeholder="Your Name" required autocomplete="name">
+    <label for="phoneNumber">Phone number</label>
+    <input type="tel" id="phoneNumber" placeholder="Phone Number" required autocomplete="tel" inputmode="tel" pattern="[+]?[0-9][0-9 ()-]{7,14}" title="Enter a phone number with 8 to 15 digits; spaces, parentheses and hyphens are allowed.">
+    <label for="quantity">Quantity</label>
+    <select id="quantity" required><option value="">Select Quantity</option><option value="piece" data-count="1" data-unit="Piece">1 Piece</option><option value="kg" data-count="1" data-unit="Kg">1 Kg</option></select>
+    <label for="preference">Egg preference</label>
+    <select id="preference" required><option value="">Egg / Eggless</option><option>Egg</option><option>Eggless</option></select>
+    <button type="submit">Confirm Order</button>
+  </form>
+  <p id="orderMessage" class="form-message" role="status" aria-live="polite"></p>
+  <section id="orderSummary" class="order-summary" aria-labelledby="orderSummaryTitle" hidden>
+    <h3 id="orderSummaryTitle">Your Order Summary</h3>
+    <dl>
+      <div><dt>Product</dt><dd id="summaryProduct"></dd></div>
+      <div><dt>Price per unit</dt><dd id="summaryUnitPrice"></dd></div>
+      <div><dt>Quantity</dt><dd id="summaryQuantity"></dd></div>
+      <div><dt>Preference</dt><dd id="summaryPreference"></dd></div>
+      <div><dt>Subtotal</dt><dd id="summarySubtotal"></dd></div>
+      <div class="total-row"><dt><strong>Total</strong></dt><dd id="summaryTotal"><strong></strong></dd></div>
+    </dl>
+  </section>
+</main>
+<footer><p>📍 Fresh Crumbs Bakehouse | ☎ 9876543210</p></footer>
+<script>
+  // Prices mirror the per-piece and per-kilogram prices shown on the product pages.
+  const productPrices = {
+    "Chocolate Cake": { piece: 120, kg: 550 },
+    "Vanilla Cake": { piece: 100, kg: 450 },
+    "Strawberry Cake": { piece: 120, kg: 750 },
+    "Fudge Brownie": { piece: 90, kg: 650 },
+    "Walnut Brownie": { piece: 100, kg: 700 },
+    "Choco-chip Brownie": { piece: 95, kg: 680 },
+    "Choco-chip Cookies": { piece: 40, kg: 500 },
+    "Oatmeal Cookies": { piece: 45, kg: 520 },
+    "Butter Cookies": { piece: 35, kg: 480 },
+    "Blueberry Muffin": { piece: 70, kg: 550 },
+    "Chocolate Muffin": { piece: 75, kg: 580 },
+    "Banana Muffin": { piece: 65, kg: 540 }
+  };
+  const productField = document.getElementById("productName");
+  const requestedProduct = new URLSearchParams(window.location.search).get("product");
+  if (Object.prototype.hasOwnProperty.call(productPrices, requestedProduct)) productField.value = requestedProduct;
+
+  const form = document.getElementById("orderForm");
+  const message = document.getElementById("orderMessage");
+  const summary = document.getElementById("orderSummary");
+  const customerName = document.getElementById("customerName");
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+    customerName.setCustomValidity(customerName.value.trim() ? "" : "Please enter your name.");
+    const phoneDigits = document.getElementById("phoneNumber").value.replace(/\D/g, "");
+    if (!this.checkValidity() || phoneDigits.length < 8 || phoneDigits.length > 15) {
+      summary.hidden = true;
+      message.textContent = "Please complete all fields with valid information.";
+      this.reportValidity();
+      return;
+    }
+
+    const quantitySelect = document.getElementById("quantity");
+    const selectedQuantity = quantitySelect.selectedOptions[0];
+    const quantityUnit = selectedQuantity.value;
+    const unitPrice = productPrices[productField.value]?.[quantityUnit];
+    const quantityCount = Number(selectedQuantity.dataset.count);
+    if (!Number.isFinite(unitPrice) || !Number.isFinite(quantityCount) || quantityCount <= 0) {
+      summary.hidden = true;
+      message.textContent = "Pricing is currently unavailable for this selection.";
+      return;
+    }
+
+    const subtotal = unitPrice * quantityCount;
+    const currency = new Intl.NumberFormat("en-IN", { style: "currency", currency: "INR", maximumFractionDigits: 2 });
+    document.getElementById("summaryProduct").textContent = productField.value;
+    document.getElementById("summaryUnitPrice").textContent = `${currency.format(unitPrice)} / ${selectedQuantity.dataset.unit}`;
+    document.getElementById("summaryQuantity").textContent = selectedQuantity.textContent;
+    document.getElementById("summaryPreference").textContent = document.getElementById("preference").value;
+    document.getElementById("summarySubtotal").textContent = currency.format(subtotal);
+    document.querySelector("#summaryTotal strong").textContent = currency.format(subtotal);
+    summary.hidden = false;
+    message.textContent = "Your order summary is ready!";
+  });
+</script>
+</body>
+</html>

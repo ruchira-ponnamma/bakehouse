@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fresh Crumbs Bakehouse</title>
+    <link rel="stylesheet" href="style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+</head>
+
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <a href="index.html">
+                <img src="Images/Logo.png" alt="Fresh Crumbs Bakehouse Logo">
+                <span class="logo-text">Fresh Crumbs Bakehouse</span>
+            </a>
+        </div>
+
+        <nav aria-label="Main navigation">
+            <a href="index.html" aria-current="page">Home</a>
+            <a href="cakes.html">Cakes</a>
+            <a href="brownies.html">Brownies</a>
+            <a href="cookies.html">Cookies</a>
+            <a href="muffins.html">Muffins</a>
+            <a href="feedback.html">Feedback</a>
+
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+  <div class="hero-slide active">
+    <img src="bakehouse.jpg" alt="Bakery">
+    <div class="hero-text">
+      <h1>Freshly Baked Happiness</h1>
+      <p>Premium cakes, brownies, cookies & muffins</p>
+    </div>
+  </div>
+
+  <div class="hero-slide">
+    <img src="ban3.jpg" alt="Cupcakes">
+    <div class="hero-text">
+      <h1>Moments Made Sweeter</h1>
+      <p>Birthdays • Celebrations • Custom Orders</p>
+    </div>
+  </div>
+
+  <div class="hero-slide">
+    <img src="cake-stand-with-chocolate-cherry-cake-cupcakes-web.jpg" alt="Cakes">
+    <div class="hero-text">
+      <h1>Every Bite Matters</h1>
+      <p>Egg & Eggless Options Available</p>
+    </div>
+  </div>
+<div class="hero-dots">
+  <button class="dot active" type="button" aria-label="Show slide 1" aria-pressed="true" onclick="goToSlide(0)"></button>
+  <button class="dot" type="button" aria-label="Show slide 2" aria-pressed="false" onclick="goToSlide(1)"></button>
+  <button class="dot" type="button" aria-label="Show slide 3" aria-pressed="false" onclick="goToSlide(2)"></button>
+</div>
+
+</section>
+
+
+    <!-- Categories Section -->
+    <section class="categories">
+        <h2>Our Specialties</h2>
+
+        <div class="category-grid">
+
+            <div class="category-card">
+                <a href="cakes.html">
+                    <img src="cake head.jpg" alt="Cakes">
+                    <h3>Cakes</h3>
+                </a>
+            </div>
+
+            <div class="category-card">
+                <a href="brownies.html">
+                    <img src="brownie head.jpg" alt="Brownies">
+                    <h3>Brownies</h3>
+                </a>
+            </div>
+
+            <div class="category-card">
+                <a href="cookies.html">
+                    <img src="cookies head.jpg" alt="Cookies">
+                    <h3>Cookies</h3>
+                </a>
+            </div>
+
+            <div class="category-card">
+                <a href="muffins.html">
+                    <img src="muffin head.jpg" alt="Muffins">
+                    <h3>Muffins</h3>
+                </a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>
+            📍 Fresh Crumbs Bakehouse - Vijayanagar 3rd Stage, Mysuru, Karnataka |
+            ☎ 9876543210
+        </p>
+    </footer>
+
+   <script>
+let currentSlide = 0;
+const slides = document.querySelectorAll('.hero-slide');
+const dots = document.querySelectorAll('.dot');
+
+function showSlide(index) {
+  slides.forEach(slide => slide.classList.remove('active'));
+  dots.forEach(dot => { dot.classList.remove('active'); dot.setAttribute('aria-pressed', 'false'); });
+
+  slides[index].classList.add('active');
+  dots[index].classList.add('active');
+  dots[index].setAttribute('aria-pressed', 'true');
+
+  currentSlide = index;
+}
+
+function nextSlide() {
+  currentSlide = (currentSlide + 1) % slides.length;
+  showSlide(currentSlide);
+}
+
+function goToSlide(index) {
+  showSlide(index);
+}
+
+// AUTO SLIDE SPEED (change if needed)
+setInterval(nextSlide, 2000);
+</script>
+
+</body>
+</html>
