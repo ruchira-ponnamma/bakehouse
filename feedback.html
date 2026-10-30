@@ -5,28 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Customer Reviews | Fresh Crumbs Bakehouse</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    body { background: #fff7f2; }
-    h2, h3 { text-align: center; }
-    .container { width: 90%; max-width: 600px; margin: 40px auto; background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
-    .container input, .container textarea { width: 100%; padding: 10px; margin: 8px 0; border-radius: 8px; border: 1px solid #ccc; font-size: 14px; }
-    .container button { width: 100%; padding: 12px; background: #ff8c66; border: none; color: white; font-size: 16px; border-radius: 8px; cursor: pointer; transition: 0.3s; }
-    .container button:hover { background: #ff7043; }
-    #message { text-align: center; color: #426b38; font-weight: bold; margin-top: 10px; }
-    .reviews { margin-top: 20px; }
-    .review-card { background: #fff3eb; padding: 14px; margin: 12px 0; border-radius: 12px; box-shadow: 0 3px 8px rgba(0,0,0,0.08); line-height: 1.4; }
-    .review-card strong { color: #333; }
-  </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Skip to content</a>
 <header>
   <div class="logo"><a href="index.html"><img src="Images/Logo.png" alt="Fresh Crumbs Bakehouse Logo"><span class="logo-text">Fresh Crumbs Bakehouse</span></a></div>
   <nav aria-label="Main navigation"><a href="index.html">Home</a><a href="cakes.html">Cakes</a><a href="brownies.html">Brownies</a><a href="cookies.html">Cookies</a><a href="muffins.html">Muffins</a><a href="feedback.html" aria-current="page">Feedback</a></nav>
 </header>
-<main class="container">
+<main id="main-content" class="feedback-panel">
   <h2>What Our Customers Say</h2>
   <p>We'd love to hear about your experience with Fresh Crumbs Bakehouse.</p>
-  <form id="feedbackForm" novalidate>
+  <form id="feedbackForm" class="feedback-form" novalidate>
     <h3>Leave Your Feedback</h3>
     <label for="name">Your name</label>
     <input type="text" id="name" placeholder="Your name" required maxlength="80">
@@ -34,7 +23,7 @@
     <textarea id="review" placeholder="Write your review..." required maxlength="2000"></textarea>
     <button type="submit">Submit Review</button>
   </form>
-  <p id="message" role="status" aria-live="polite"></p>
+  <p id="message" class="feedback-message" role="status" aria-live="polite"></p>
   <section class="reviews" aria-labelledby="reviewsTitle"><h3 id="reviewsTitle">Customer Reviews</h3><div id="reviewList"></div></section>
 </main>
 <footer><p>📍 Fresh Crumbs Bakehouse - Vijayanagar 3rd Stage, Mysuru, Karnataka | ☎ 9876543210</p></footer>

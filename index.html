@@ -9,6 +9,7 @@
 </head>
 
 <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
     <!-- Header -->
     <header>
@@ -31,35 +32,38 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <main id="main-content">
+    <section class="hero home-hero" aria-label="Featured bakery offerings" aria-roledescription="carousel">
 
-  <div class="hero-slide active">
-    <img src="bakehouse.jpg" alt="Bakery">
+  <div class="hero-slide active" role="group" aria-roledescription="slide" aria-label="1 of 3" aria-hidden="false">
+    <img src="bakehouse.jpg" alt="Freshly prepared treats at the bakery">
     <div class="hero-text">
       <h1>Freshly Baked Happiness</h1>
       <p>Premium cakes, brownies, cookies & muffins</p>
     </div>
   </div>
 
-  <div class="hero-slide">
-    <img src="ban3.jpg" alt="Cupcakes">
+  <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="2 of 3" aria-hidden="true">
+    <img src="ban3.jpg" alt="Cupcakes decorated for a celebration">
     <div class="hero-text">
       <h1>Moments Made Sweeter</h1>
       <p>Birthdays • Celebrations • Custom Orders</p>
     </div>
   </div>
 
-  <div class="hero-slide">
-    <img src="cake-stand-with-chocolate-cherry-cake-cupcakes-web.jpg" alt="Cakes">
+  <div class="hero-slide" role="group" aria-roledescription="slide" aria-label="3 of 3" aria-hidden="true">
+    <img src="cake-stand-with-chocolate-cherry-cake-cupcakes-web.jpg" alt="Cakes and cupcakes on a decorated stand">
     <div class="hero-text">
       <h1>Every Bite Matters</h1>
       <p>Egg & Eggless Options Available</p>
     </div>
   </div>
-<div class="hero-dots">
-  <button class="dot active" type="button" aria-label="Show slide 1" aria-pressed="true" onclick="goToSlide(0)"></button>
-  <button class="dot" type="button" aria-label="Show slide 2" aria-pressed="false" onclick="goToSlide(1)"></button>
-  <button class="dot" type="button" aria-label="Show slide 3" aria-pressed="false" onclick="goToSlide(2)"></button>
+<div class="hero-controls">
+  <div class="hero-dots" role="group" aria-label="Choose a featured slide">
+    <button class="dot active" type="button" aria-label="Show slide 1" aria-pressed="true" data-slide="0"></button>
+    <button class="dot" type="button" aria-label="Show slide 2" aria-pressed="false" data-slide="1"></button>
+    <button class="dot" type="button" aria-label="Show slide 3" aria-pressed="false" data-slide="2"></button>
+  </div>
 </div>
 
 </section>
@@ -73,34 +77,35 @@
 
             <div class="category-card">
                 <a href="cakes.html">
-                    <img src="cake head.jpg" alt="Cakes">
+                    <img src="cake head.jpg" alt="Decorated cakes" loading="lazy">
                     <h3>Cakes</h3>
                 </a>
             </div>
 
             <div class="category-card">
                 <a href="brownies.html">
-                    <img src="brownie head.jpg" alt="Brownies">
+                    <img src="brownie head.jpg" alt="Freshly baked brownies" loading="lazy">
                     <h3>Brownies</h3>
                 </a>
             </div>
 
             <div class="category-card">
                 <a href="cookies.html">
-                    <img src="cookies head.jpg" alt="Cookies">
+                    <img src="cookies head.jpg" alt="Assorted cookies" loading="lazy">
                     <h3>Cookies</h3>
                 </a>
             </div>
 
             <div class="category-card">
                 <a href="muffins.html">
-                    <img src="muffin head.jpg" alt="Muffins">
+                    <img src="muffin head.jpg" alt="Fresh muffins" loading="lazy">
                     <h3>Muffins</h3>
                 </a>
             </div>
 
         </div>
     </section>
+    </main>
 
     <!-- Footer -->
     <footer>
@@ -112,31 +117,39 @@
 
    <script>
 let currentSlide = 0;
-const slides = document.querySelectorAll('.hero-slide');
-const dots = document.querySelectorAll('.dot');
+const slides = [...document.querySelectorAll('.hero-slide')];
+const dots = [...document.querySelectorAll('.dot')];
+let slideshowTimer;
 
 function showSlide(index) {
-  slides.forEach(slide => slide.classList.remove('active'));
-  dots.forEach(dot => { dot.classList.remove('active'); dot.setAttribute('aria-pressed', 'false'); });
-
-  slides[index].classList.add('active');
-  dots[index].classList.add('active');
-  dots[index].setAttribute('aria-pressed', 'true');
-
+  if (index < 0 || index >= slides.length) return;
+  slides.forEach((slide, slideIndex) => {
+    const active = slideIndex === index;
+    slide.classList.toggle('active', active);
+    slide.setAttribute('aria-hidden', String(!active));
+  });
+  dots.forEach((dot, dotIndex) => {
+    const active = dotIndex === index;
+    dot.classList.toggle('active', active);
+    dot.setAttribute('aria-pressed', String(active));
+  });
   currentSlide = index;
 }
 
 function nextSlide() {
-  currentSlide = (currentSlide + 1) % slides.length;
-  showSlide(currentSlide);
+  showSlide((currentSlide + 1) % slides.length);
 }
 
-function goToSlide(index) {
+function startSlideshow() {
+  window.clearInterval(slideshowTimer);
+  if (slides.length > 1) slideshowTimer = window.setInterval(nextSlide, 4000);
+}
+
+dots.forEach((dot, index) => dot.addEventListener('click', () => {
   showSlide(index);
-}
-
-// AUTO SLIDE SPEED (change if needed)
-setInterval(nextSlide, 2000);
+  startSlideshow();
+}));
+startSlideshow();
 </script>
 
 </body>
