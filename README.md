@@ -1,8 +1,18 @@
 # Fresh Crumbs Bakehouse
 
-Fresh Crumbs Bakehouse is a small static bakery website for browsing cakes, brownies, cookies, and muffins, with demo order and browser-local feedback pages.
+Fresh Crumbs Bakehouse is a responsive, multi-page bakery website built using HTML, CSS, and JavaScript. It allows visitors to browse cakes, brownies, cookies, and muffins, with a demo order form and browser-local feedback functionality.
 
-## Pages and files
+**Live Website:** https://ruchira-ponnamma.github.io/bakehouse/  
+**GitHub Repository:** https://github.com/ruchira-ponnamma/bakehouse
+
+## Technologies Used
+
+- HTML5
+- CSS3
+- JavaScript
+- Git and GitHub Pages
+
+## Pages and Files
 
 - `index.html` — home page and rotating hero carousel
 - `cakes.html`, `brownies.html`, `cookies.html`, `muffins.html` — category and product pages
@@ -13,11 +23,19 @@ Fresh Crumbs Bakehouse is a small static bakery website for browsing cakes, brow
 - Root-level `.jpg` files — product and banner photography
 - `Images/Logo.png` — site logo
 
-## Run locally
+## Run Locally
 
-Open `index.html` in a browser. The site uses static HTML, CSS, and JavaScript and has no build step or package installation. For a local web server, open a terminal in this folder and run `py -m http.server 8000`, then visit `http://localhost:8000`.
+Open `index.html` in a browser. The site uses static HTML, CSS, and JavaScript and has no build step or package installation.
 
-## Current limitations
+For a local web server, open a terminal in this folder and run:
+
+```bash
+py -m http.server 8000
+```
+
+Then visit `http://localhost:8000`.
+
+## Current Limitations
 
 The order form is a demonstration only. It validates the entered fields but does not submit, store, or send an order. To place an order, contact the bakery by phone.
 
@@ -25,13 +43,12 @@ Feedback is stored in `localStorage` in the current browser only. It is not sent
 
 ## Images
 
-Product and banner photos are stored beside the HTML files and referenced using relative paths. The logo is stored in the case-sensitive `Images/` folder. The homepage hero uses `cake-stand-with-chocolate-cherry-cake-cupcakes-web.jpg`, a reduced-size web copy; the original full-resolution image is retained alongside it.
+Product and banner photos are stored beside the HTML files and referenced using relative paths. The logo is stored in the case-sensitive `Images/` folder.
 
-## Deploy to GitHub Pages
+The homepage hero uses `cake-stand-with-chocolate-cherry-cake-cupcakes-web.jpg`, a reduced-size web copy; the original full-resolution image is retained alongside it.
 
-1. Create a GitHub repository and add the contents of this folder.
-2. In the repository, open **Settings → Pages**.
-3. Choose **Deploy from a branch**, select the branch containing the site and the repository root folder, then save.
-4. Wait for GitHub Pages to finish publishing and open the URL shown in the Pages settings.
+## Deployment
+
+The website is hosted using GitHub Pages.
 
 The site is static and does not require a server-side runtime. Keep the relative paths and `Images` folder capitalization unchanged when uploading.
