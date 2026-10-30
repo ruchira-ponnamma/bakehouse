@@ -1,6 +1,6 @@
 # Fresh Crumbs Bakehouse
 
-Fresh Crumbs Bakehouse is a responsive, multi-page bakery website built using HTML, CSS, and JavaScript. It allows visitors to browse cakes, brownies, cookies, and muffins, with a demo order form and browser-local feedback functionality.
+Fresh Crumbs Bakehouse is a responsive, multi-page bakery website built using HTML, CSS, and JavaScript. It features product categories, an automatic image slideshow, a demo order form, and browser-based feedback functionality.
 
 **Live Website:** https://ruchira-ponnamma.github.io/bakehouse/  
 **GitHub Repository:** https://github.com/ruchira-ponnamma/bakehouse
@@ -37,9 +37,9 @@ Then visit `http://localhost:8000`.
 
 ## Current Limitations
 
-The order form is a demonstration only. It validates the entered fields but does not submit, store, or send an order. To place an order, contact the bakery by phone.
+The order form is a demonstration only. It validates the entered fields but does not submit, store, or send an actual order.
 
-Feedback is stored in `localStorage` in the current browser only. It is not sent to or shared with the bakery or other visitors, and it will not follow a visitor to another browser or device.
+Feedback is stored in `localStorage` in the current browser only. It is not sent to a server or shared with other visitors, and it will not follow a visitor to another browser or device.
 
 ## Images
 
